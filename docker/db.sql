@@ -5,5 +5,5 @@ CREATE TABLE PHONE_BOOK
     phone_number varchar NOT NULL,
     birth_date   date,
 
-    primary key (user_name, contact_name, phone_number)
+    primary key (user_name, contact_name)
 )

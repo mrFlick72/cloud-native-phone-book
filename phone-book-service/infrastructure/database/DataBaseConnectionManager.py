@@ -1,4 +1,3 @@
-import psycopg2
 from psycopg2 import pool
 
 
@@ -13,8 +12,9 @@ class DataBaseConnectionManager:
                                                        database="postgres")
 
     def close_connection_cursor(self, cursor):
+        self.thread_pool.getconn(self).commit()
         cursor.close()
 
-    def get_connection_cursor(self) -> psycopg2.Cu:
+    def get_connection_cursor(self):
         conn = self.thread_pool.getconn(self)
         return conn.cursor()

@@ -28,7 +28,7 @@ class PhoneBookEndPoint:
                          self.delete_phone_book_record_api, methods=['DELETE'])
 
     def get_phone_book_record_api(self):
-        phone_book_records = self.get_phone_book_records.execute("vvaudi")
+        phone_book_records = self.get_phone_book_records.execute(get_user_name())
         plain_records = fromDomainToRepresentations(phone_book_records)
 
         return self.app.response_class(
