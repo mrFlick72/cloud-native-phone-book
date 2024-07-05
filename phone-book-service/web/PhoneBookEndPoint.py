@@ -1,10 +1,10 @@
 import dataclasses
 import json
 
-from flask import Flask, request
+from flask import Flask, request, jsonify
 
-from domain.PhoneBook import GetPhoneBookRecords, SavePhoneBookRecord, DeletePhoneBookRecord
-from web.PhoneBookConverter import fromDomainToRepresentations
+from domain.PhoneBook import GetPhoneBookRecords, SavePhoneBookRecord, DeletePhoneBookRecord, PhoneBook
+from web.PhoneBookConverter import fromDomainToRepresentations, fromRepresentationToDomain, contact_name
 
 
 class PhoneBookEndPoint:
@@ -38,12 +38,10 @@ class PhoneBookEndPoint:
         )
 
     def save_phone_book_record_api(self, contact_id):
-        # self.add_phone_book_record
-        print(contact_id)
-        print(request)
+        phone_book_repository = fromRepresentationToDomain(contact_id, json.loads(request.data))
+        self.update_phone_book_record.execute(phone_book_repository)
         return self.app.response_class(status=204)
 
     def delete_phone_book_record_api(self, contact_id):
-        # self.add_phone_book_record
-        print(contact_id)
+        self.delete_phone_book_record.execute(contact_name(contact_id))
         return self.app.response_class(status=204)

@@ -1,4 +1,15 @@
 GET localhost:5000/phone-book
 
 ###
-PUT localhost:5000/phone-book/123
+PUT localhost:5000/phone-book/MTIz
+Content-Type: application/json
+
+{
+  "user_name": "vvaudi",
+  "phone_number": "339 23 23 233",
+  "birth_date": "2017-10-10"
+}
+
+
+###
+DELETE localhost:5000/phone-book/MTIz
