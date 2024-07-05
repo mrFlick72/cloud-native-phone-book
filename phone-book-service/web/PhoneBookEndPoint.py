@@ -4,6 +4,7 @@ import json
 from flask import Flask, request, jsonify
 
 from domain.PhoneBook import GetPhoneBookRecords, SavePhoneBookRecord, DeletePhoneBookRecord, PhoneBook
+from domain.UserNameResolver import get_user_name
 from web.PhoneBookConverter import fromDomainToRepresentations, fromRepresentationToDomain, contact_name
 
 
@@ -43,5 +44,5 @@ class PhoneBookEndPoint:
         return self.app.response_class(status=204)
 
     def delete_phone_book_record_api(self, contact_id):
-        self.delete_phone_book_record.execute(contact_name(contact_id))
+        self.delete_phone_book_record.execute(get_user_name(), contact_name(contact_id))
         return self.app.response_class(status=204)

@@ -1,13 +1,23 @@
 GET localhost:5000/phone-book
 
+
 ###
 PUT localhost:5000/phone-book/MTIz
 Content-Type: application/json
 
 {
-  "user_name": "vvaudi",
   "phone_number": "339 23 23 233",
-  "birth_date": "2017-10-10"
+  "birth_date": "2017-10-11"
+}
+
+
+###
+PUT localhost:5000/phone-book/NDU2
+Content-Type: application/json
+
+{
+  "phone_number": "339 32 32 233",
+  "birth_date": "2027-11-10"
 }
 
 

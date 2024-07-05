@@ -1,20 +1,30 @@
 from domain.PhoneBook import PhoneBookRepository, PhoneBook
-import datetime
 
 
 class InMemoryPhoneBookRepository(PhoneBookRepository):
 
+    def __init__(self):
+        self.storage = set([])
+
     def get_records(self, user_name):
-        result = [PhoneBook(
-            user_name='vvaudi',
-            contact_name="Eva Therese Vaudi",
-            phone_number="333 23 23 233",
-            birth_date=datetime.date.today()
-        )]
-        return result
+        return self.storage
 
     def save(self, phone_book_record: PhoneBook):
-        pass
+        try:
+            self.storage.remove(phone_book_record)
+        except:
+            pass
 
-    def delete(self, phone_book_record: PhoneBook):
-        pass
+        self.storage.add(phone_book_record)
+
+    def delete(self, user_name: str, contact_name: str):
+        try:
+            self.storage.remove(
+                PhoneBook(user_name=user_name,
+                          contact_name=contact_name,
+                          phone_number=None,
+                          birth_date=None
+                          )
+            )
+        except:
+            pass

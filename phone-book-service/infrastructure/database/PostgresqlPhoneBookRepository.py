@@ -10,5 +10,5 @@ class PostgresqlPhoneBookRepository(PhoneBookRepository):
     def save(self, phone_book_record: PhoneBook):
         pass
 
-    def delete(self, phone_book_record: PhoneBook):
+    def delete(self, user_name: str, contact_name: str):
         pass

@@ -9,6 +9,12 @@ class PhoneBook:
     phone_number: str
     birth_date: datetime.date
 
+    def __hash__(self):
+        return hash(self.user_name) + hash(self.contact_name)
+
+    def __eq__(self, other):
+        return self.user_name == other.user_name and self.contact_name == other.contact_name
+
 
 class PhoneBookRepository:
 
@@ -18,7 +24,7 @@ class PhoneBookRepository:
     def save(self, phone_book_record: PhoneBook):
         pass
 
-    def delete(self, phone_book_record: PhoneBook):
+    def delete(self, user_name: str, contact_name: str):
         pass
 
 
@@ -45,5 +51,5 @@ class DeletePhoneBookRecord:
     def __init__(self, repository: PhoneBookRepository):
         self.repository = repository
 
-    def execute(self, phone_book_record: PhoneBook):
-        self.repository.delete(phone_book_record)
+    def execute(self, user_name: str, contact_name: str):
+        self.repository.delete(user_name, contact_name)
