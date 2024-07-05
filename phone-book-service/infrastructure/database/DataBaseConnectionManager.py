@@ -1,3 +1,4 @@
+import psycopg2
 from psycopg2 import pool
 
 
@@ -14,6 +15,6 @@ class DataBaseConnectionManager:
     def close_connection_cursor(self, cursor):
         cursor.close()
 
-    def get_connection_cursor(self):
+    def get_connection_cursor(self) -> psycopg2.Cu:
         conn = self.thread_pool.getconn(self)
         return conn.cursor()
