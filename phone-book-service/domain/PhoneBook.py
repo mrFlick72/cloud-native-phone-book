@@ -12,7 +12,7 @@ class PhoneBook:
 
 class PhoneBookRepository:
 
-    def get_records(self, user_name) -> list[PhoneBook]:
+    def get_records(self, user_name):
         pass
 
     def save(self, phone_book_record: PhoneBook):
@@ -28,7 +28,6 @@ class GetPhoneBookRecords:
         self.repository = repository
 
     def execute(self, user_name: str) -> list[PhoneBook]:
-        print(self.repository)
         return self.repository.get_records(user_name)
 
 

@@ -1,4 +1,7 @@
-from flask import Flask, request, json
+import dataclasses
+import json
+
+from flask import Flask, request
 
 from domain.PhoneBook import GetPhoneBookRecords, SavePhoneBookRecord, DeletePhoneBookRecord
 
@@ -24,10 +27,16 @@ class PhoneBookAPi:
 
     def get_phone_book_record_api(self):
         phone_book_records = self.get_phone_book_records.execute("vvaudi")
-        print(phone_book_records)
+        plain_records = []
+        for item in phone_book_records:
+            asdict = dataclasses.asdict(item)
+            asdict["birth_date"] = asdict["birth_date"].strftime('%Y-%m-%d')
+            plain_records.append(asdict)
+
         return self.app.response_class(
-            response=json.dumps(phone_book_records),
+            response=json.dumps(plain_records),
             status=200,
+            content_type='application/json',
             mimetype='application/json'
         )
 
