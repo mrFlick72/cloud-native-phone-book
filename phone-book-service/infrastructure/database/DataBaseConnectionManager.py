@@ -1,15 +1,25 @@
 from psycopg2 import pool
+import os
+
+
+class DatabaseConfigurationProp:
+    def __init__(self):
+        self.user = os.getenv("PHONE_BOOK_DATABASE_USER_NAME")
+        self.password = os.getenv("PHONE_BOOK_DATABASE_PASSWORD")
+        self.host = os.getenv("PHONE_BOOK_DATABASE_HOST")
+        self.port = os.getenv("PHONE_BOOK_DATABASE_PORT")
+        self.database = os.getenv("PHONE_BOOK_DATABASE_NAME")
 
 
 class DataBaseConnectionManager:
 
-    def __init__(self):
+    def __init__(self, configuration: DatabaseConfigurationProp):
         self.thread_pool = pool.ThreadedConnectionPool(2, 10,
-                                                       user="postgres",
-                                                       password="postgres",
-                                                       host="127.0.0.1",
-                                                       port="5436",
-                                                       database="postgres")
+                                                       user=configuration.user,
+                                                       password=configuration.password,
+                                                       host=configuration.host,
+                                                       port=configuration.port,
+                                                       database=configuration.database)
 
     def close_connection_cursor(self, cursor):
         self.thread_pool.getconn(self).commit()
