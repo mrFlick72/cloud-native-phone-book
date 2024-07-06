@@ -2,6 +2,18 @@ POST localhost:3000/login
 Content-Type: application/json
 
 {
-  "userName" :  "vvaudi",
+  "userName" :  "vvaudi123",
   "password" : "secret"
+}
+
+###
+POST localhost:3000/account
+Content-Type: application/json
+
+{
+  "userName" :  "vvaudi123",
+  "password" : "secret",
+  "firstName" : "Valerio",
+  "lastName" : "Vaudi"
+
 }

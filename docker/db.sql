@@ -6,4 +6,12 @@ CREATE TABLE PHONE_BOOK
     birth_date   date,
 
     primary key (user_name, contact_name)
-)
+);
+
+CREATE TABLE ACCOUNT
+(
+    user_name  varchar NOT NULL primary key,
+    password   varchar NOT NULL,
+    first_name varchar,
+    last_name  varchar
+);
