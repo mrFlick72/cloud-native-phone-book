@@ -38,9 +38,9 @@ export function registerLoginEndPointFor(app: Express) {
         loginTokenService()
     )
 
-    app.post('/login', (req: Request, res: Response) => {
+    app.post('/login', async (req: Request, res: Response) => {
         const userNameAndPassword = req.body as UserNameAndPassword;
-        userLoginService.loginFor(userNameAndPassword.userName, userNameAndPassword.password)
-            .then((loginToken) => res.send(loginToken))
+        const loginToken = await userLoginService.loginFor(userNameAndPassword.userName, userNameAndPassword.password)
+        res.send(loginToken)
     });
 }
