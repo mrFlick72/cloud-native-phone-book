@@ -1,6 +1,6 @@
 import {User} from "./user";
 import {SignJWT} from "jose";
-import {jwtSignatureSecretKey} from "./jwk";
+import {jwtSignaturePrivateKey} from "./jwk";
 
 export type Token = {
     content: string
@@ -31,7 +31,7 @@ class JwtLoginTokenService implements LoginTokenService {
             .setIssuer(process.env.JWT_ISSUER || "http://localhost") // issuer
             .setAudience(process.env.JWT_AUDIENCE || "http://localhost") // audience
             .setExpirationTime(process.env.JWT_EXPIRATION_TIME || "1h") // token expiration time, e.g., "1 day"
-            .sign(jwtSignatureSecretKey);
+            .sign(jwtSignaturePrivateKey);
 
         return Promise.resolve({content: token})
     }

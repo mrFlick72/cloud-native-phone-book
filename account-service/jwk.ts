@@ -15,18 +15,16 @@ const {
     modulusLength: 4096,
     publicKeyEncoding: {
         type: 'spki',
-        format: 'pem',
+        format: 'pem'
     },
     privateKeyEncoding: {
         type: 'pkcs8',
-        format: 'pem',
-        cipher: 'aes-256-cbc',
-        passphrase: 'top secret',
-    },
+        format: 'pem'
+    }
 });
 
-export const jwtSignatureSecretKey = createPrivateKey(privateKey);
 export const jwtSignaturePublicKey = createPublicKey(publicKey);
+export const jwtSignaturePrivateKey = createPrivateKey(privateKey);
 
 export async function registerJwkEndpointFor(app: Express) {
 
