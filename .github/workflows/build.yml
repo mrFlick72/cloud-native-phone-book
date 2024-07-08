@@ -1,0 +1,40 @@
+jobs:
+  - build-account-service:
+    runs-on: ubuntu-20.04
+    steps:
+      - name: checkout
+        uses: actions/checkout@v3
+      - name: build
+        run: |
+          docker login -u ${{ secrets.DOCKER_HUB_USERNAME }} -p ${{ secrets.DOCKER_HUB_PASSWORD }}
+          
+          if [[ ${GITHUB_REF##*/} == 'master' ]]
+          then
+              DOCKER_TAG="latest"
+          else
+              DOCKER_TAG="${GITHUB_REF##*/}"
+          fi
+          
+          echo "$DOCKER_TAG"
+          docker build -t mrflick72/cloud-native-phone-book_account-service:$DOCKER_TAG .
+          docker push  mrflick72/cloud-native-phone-book_account-service:$DOCKER_TAG
+
+  - build-phone-book-service:
+    runs-on: ubuntu-20.04
+    steps:
+      - name: checkout
+        uses: actions/checkout@v3
+      - name: build
+        run: |
+          docker login -u ${{ secrets.DOCKER_HUB_USERNAME }} -p ${{ secrets.DOCKER_HUB_PASSWORD }}
+          
+          if [[ ${GITHUB_REF##*/} == 'master' ]]
+          then
+              DOCKER_TAG="latest"
+          else
+              DOCKER_TAG="${GITHUB_REF##*/}"
+          fi
+          
+          echo "$DOCKER_TAG"
+          docker build -t mrflick72/cloud-native-phone-book_phone-book-service:$DOCKER_TAG .
+          docker push  mrflick72/cloud-native-phone-book_phone-book-service:$DOCKER_TAG
