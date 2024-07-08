@@ -1,5 +1,10 @@
+name: cloud native phone book builds
+
+on:
+  push: { }
+
 jobs:
-  - build-account-service:
+  build-account-service:
     runs-on: ubuntu-20.04
     steps:
       - name: checkout
@@ -19,7 +24,7 @@ jobs:
           docker build -t mrflick72/cloud-native-phone-book_account-service:$DOCKER_TAG .
           docker push  mrflick72/cloud-native-phone-book_account-service:$DOCKER_TAG
 
-  - build-phone-book-service:
+  build-phone-book-service:
     runs-on: ubuntu-20.04
     steps:
       - name: checkout
