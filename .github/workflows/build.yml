@@ -14,7 +14,7 @@ jobs:
           cd account-service
           docker login -u ${{ secrets.DOCKER_HUB_USERNAME }} -p ${{ secrets.DOCKER_HUB_PASSWORD }}
           
-          if [[ ${GITHUB_REF##*/} == 'master' ]]
+          if [[ ${GITHUB_REF##*/} == 'main' ]]
           then
               DOCKER_TAG="latest"
           else
@@ -35,7 +35,7 @@ jobs:
           cd phone-book-service
           docker login -u ${{ secrets.DOCKER_HUB_USERNAME }} -p ${{ secrets.DOCKER_HUB_PASSWORD }}
           
-          if [[ ${GITHUB_REF##*/} == 'master' ]]
+          if [[ ${GITHUB_REF##*/} == 'main' ]]
           then
               DOCKER_TAG="latest"
           else
