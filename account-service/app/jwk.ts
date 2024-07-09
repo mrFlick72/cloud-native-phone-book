@@ -2,11 +2,6 @@ import {createPrivateKey, createPublicKey, createSecretKey, generateKeyPairSync}
 import {Express, Request, Response} from "express";
 import {exportJWK} from "jose";
 
-
-// KeyObject  is a representation of a key/ secret available in the Node.
-// js runtime.
-// In addition to the import functions of this library you may use the runtime APIs crypto.
-// createPublicKey , crypto. createPrivateKey , and crypto. createSecretKey  to obtain a KeyObject from your existing key material.
 const {
     publicKey,
     privateKey,
