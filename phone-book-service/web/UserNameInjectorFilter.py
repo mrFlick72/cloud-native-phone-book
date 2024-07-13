@@ -5,10 +5,13 @@ import requests
 from flask import request
 from jwt import get_unverified_header, decode
 
+from infrastructure.LocalThreadUserNameResolver import LocalThreadUserNameResolver
+
 
 class UserNameInjectorFilter:
 
     def __init__(self):
+        self.user_name_resolver = LocalThreadUserNameResolver()
         self.public_keys = {}
         self.jwk_endpoint = "http://localhost:3000/jwks"
         jwks = requests.get(self.jwk_endpoint).json()
@@ -20,9 +23,10 @@ class UserNameInjectorFilter:
     def filter(self, user_name_claim="user_name"):
         token = str(request.headers.get("authorization"))
         print(f"token: {token}")
-        decoded_token = decode(jwt=token, key=self.public_keys['123'], algorithms=['RS256'], audience="http://localhost:5000")
+        decoded_token = decode(jwt=token, key=self.public_keys['123'], algorithms=['RS256'],
+                               audience="http://localhost:5000")
         print(f"decoded token: {decoded_token}")
-
+        self.user_name_resolver.set_user_name(decoded_token["user_name"])
         return None
 
     def decode(self, token):

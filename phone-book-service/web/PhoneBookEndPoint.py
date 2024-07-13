@@ -3,8 +3,8 @@ import json
 
 from flask import Flask, request, jsonify
 
-from domain.PhoneBook import GetPhoneBookRecords, SavePhoneBookRecord, DeletePhoneBookRecord, PhoneBook
-from domain.UserNameResolver import get_user_name
+from domain import UserNameResolver
+from domain.PhoneBook import GetPhoneBookRecords, SavePhoneBookRecord, DeletePhoneBookRecord
 from web.PhoneBookConverter import fromDomainToRepresentations, fromRepresentationToDomain, contact_name
 
 
@@ -15,8 +15,10 @@ class PhoneBookEndPoint:
                  get_phone_book_records: GetPhoneBookRecords,
                  update_phone_book_record: SavePhoneBookRecord,
                  delete_phone_book_record: DeletePhoneBookRecord,
+                 user_name_resolver: UserNameResolver
                  ):
         self.app = app
+        self.user_name_resolver = user_name_resolver
         self.get_phone_book_records = get_phone_book_records
         self.update_phone_book_record = update_phone_book_record
         self.delete_phone_book_record = delete_phone_book_record
@@ -28,7 +30,7 @@ class PhoneBookEndPoint:
                          self.delete_phone_book_record_api, methods=['DELETE'])
 
     def get_phone_book_record_api(self):
-        phone_book_records = self.get_phone_book_records.execute(get_user_name())
+        phone_book_records = self.get_phone_book_records.execute(self.user_name_resolver.get_user_name())
         plain_records = fromDomainToRepresentations(phone_book_records)
 
         return self.app.response_class(
@@ -44,5 +46,5 @@ class PhoneBookEndPoint:
         return self.app.response_class(status=204)
 
     def delete_phone_book_record_api(self, contact_id):
-        self.delete_phone_book_record.execute(get_user_name(), contact_name(contact_id))
+        self.delete_phone_book_record.execute(self.user_name_resolver.get_user_name(), contact_name(contact_id))
         return self.app.response_class(status=204)
