@@ -20,7 +20,8 @@ class UserNameInjectorFilter:
     def filter(self, user_name_claim="user_name"):
         token = str(request.headers.get("authorization"))
         print(f"token: {token}")
-        print(f"token: {decode(token)}")
+        decoded_token = decode(jwt=token, key=self.public_keys['123'], algorithms=['RS256'], audience="http://localhost:5000")
+        print(f"decoded token: {decoded_token}")
 
         return None
 

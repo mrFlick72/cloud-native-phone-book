@@ -29,8 +29,8 @@ class JwtLoginTokenService implements LoginTokenService {
                 alg: 'RS256'
             }) // algorithm
             .setIssuedAt()
-            .setIssuer(process.env.JWT_ISSUER || "http://localhost") // issuer
-            .setAudience(process.env.JWT_AUDIENCE || "http://localhost") // audience
+            .setIssuer(process.env.JWT_ISSUER || "http://localhost:3000") // issuer
+            .setAudience(process.env.JWT_AUDIENCE || "http://localhost:5000") // audience
             .setExpirationTime(process.env.JWT_EXPIRATION_TIME || "1h") // token expiration time, e.g., "1 day"
             .sign(jwtSignaturePrivateKey);
 
