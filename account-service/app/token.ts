@@ -1,6 +1,6 @@
 import {User} from "./user";
 import {SignJWT} from "jose";
-import {jwtSignaturePrivateKey} from "./jwk";
+import {JWK_KID, jwtSignaturePrivateKey} from "./jwk";
 
 export type Token = {
     content: string
@@ -18,12 +18,13 @@ class JwtLoginTokenService implements LoginTokenService {
 
     async getLoginTokenFor(user: User): Promise<Token> {
         let payload = {
-            "user-name": `${user.userName}`,
-            "first-name": `${user.firstName}`,
-            "last-name": `${user.lastName}`
+            "user_name": `${user.userName}`,
+            "first_name": `${user.firstName}`,
+            "last_name": `${user.lastName}`
         };
         const token = await new SignJWT(payload) // details to  encode in the token
             .setProtectedHeader({
+                kid: JWK_KID,
                 typ: "JWT",
                 alg: 'RS256'
             }) // algorithm
