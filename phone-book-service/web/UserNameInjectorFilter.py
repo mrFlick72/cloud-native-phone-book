@@ -1,4 +1,5 @@
 import json
+import os
 
 import jwt
 import requests
@@ -13,19 +14,16 @@ class UserNameInjectorFilter:
     def __init__(self):
         self.user_name_resolver = LocalThreadUserNameResolver.get_instance()
         self.public_keys = {}
-        self.jwk_endpoint = "http://localhost:3000/jwks"
+        self.jwk_endpoint = f"{os.getenv('ACCOUNT_SERVICE_ISS')}/jwks"
         jwks = requests.get(self.jwk_endpoint).json()
         for jwk in jwks['keys']:
             kid = jwk['kid']
-            print(f"process kid: {kid}")
             self.public_keys[kid] = jwt.algorithms.RSAAlgorithm.from_jwk(json.dumps(jwk))
 
     def filter(self, user_name_claim="user_name"):
         token = str(request.headers.get("authorization"))
-        print(f"token: {token}")
         decoded_token = decode(jwt=token, key=self.public_keys['123'], algorithms=['RS256'],
-                               audience="http://localhost:5000")
-        print(f"decoded token: {decoded_token}")
+                               audience=os.getenv('PHONE_BOOK_AUD_CLAIM'))
         self.user_name_resolver.set_user_name(decoded_token["user_name"])
         return None
 

@@ -5,15 +5,19 @@ Content-Type: application/json
   "userName" :  "vvaudi",
   "password" : "secret"
 }
+
+> {% client.global.set("auth_token", response.body.content); %}
+
 ###
 
 ###
 GET localhost:5000/phone-book
-Authorization: eyJraWQiOiIxMjMiLCJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJ1c2VyX25hbWUiOiJ2dmF1ZGkiLCJmaXJzdF9uYW1lIjoiVmFsZXJpbyAxMjMiLCJsYXN0X25hbWUiOiJWYXVkaSIsImlhdCI6MTcyMDk5MDY2MSwiaXNzIjoiaHR0cDovL2xvY2FsaG9zdDozMDAwIiwiYXVkIjoiaHR0cDovL2xvY2FsaG9zdDo1MDAwIiwiZXhwIjoxNzIwOTk0MjYxfQ.hcJ8Bb2Hzfc92xXYW4eT1OGVdaUDh0mVA8Jl19_EWQH5t-B8_IybD8eT444PNAxvYq29KV6yMMRippzYlSzL2swMt8LKTnh9y6RX9GgKd5ULhu296sdNyUlreE9EJjEQFJofdFpqAlBgGjWFEsdZWdiNbuPMHZcjr5V95oMkBqVI4aXe177DltmKfgS0OfRsdzPV4aDk7OJBRDawWMIV9zUaksLqHOuo-fxCq8JmrY6k_2ew55RNdVcmMb5sfntjDmTjQsZDUng6Jk8cNMDS9W4BdVsGO_khibT9yOvK7xQcquvxnpS6EUo7lckuer0OPWLSTzweVC8uVIuBBiaMA4sT1tfKn_XYob1XCLEg-s7S0WFlQ4n7XT_PV4fgAfg3Htm8lizvRsd3ZP3bJLO-nVNdjeJKUidtr9Eiwj45myJlO05GqFMRmJAF2lv-hQBcKIA2X4gkwpV9jq4o93C0wdG_1GTpR6YJFXh53Qe25mNPifsS9sz5DSshpLIhYszEr2gK02h7GDxpPly4tkYc2wScdatT4PMIsACQ5ZhFZ3qkMwgoKUTxK0ZqjNnXP6KCtmLdB8KAvXPtvKawzu4WIS3nlhfrtNKt_2lb5KUVS3cb3deDaXz7ubS4nHZqJVyiQWZDwNXe7s61CCeE-Rnrx8O8SnlaYx6vLxca3nL61j8
+Authorization: {{auth_token}}
 
 ###
 PUT localhost:5000/phone-book/MTIz
 Content-Type: application/json
+Authorization: {{auth_token}}
 
 {
   "phone_number": "339 23 23 233",
@@ -24,6 +28,7 @@ Content-Type: application/json
 ###
 PUT localhost:5000/phone-book/NDU2
 Content-Type: application/json
+Authorization: {{auth_token}}
 
 {
   "phone_number": "339 32 32 233",
@@ -33,3 +38,4 @@ Content-Type: application/json
 
 ###
 DELETE localhost:5000/phone-book/MTIz
+Authorization: {{auth_token}}

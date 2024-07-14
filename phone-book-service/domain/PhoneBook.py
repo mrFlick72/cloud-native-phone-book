@@ -18,7 +18,7 @@ class PhoneBook:
 
 class PhoneBookRepository:
 
-    def get_records(self, user_name):
+    def get_records(self, user_name) -> list[PhoneBook]:
         pass
 
     def save(self, phone_book_record: PhoneBook):

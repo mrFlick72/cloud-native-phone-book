@@ -1,4 +1,4 @@
-import {createPrivateKey, createPublicKey, createSecretKey, generateKeyPairSync} from "node:crypto";
+import {createPrivateKey, createPublicKey, generateKeyPairSync} from "node:crypto";
 import {Express, Request, Response} from "express";
 import {exportJWK} from "jose";
 

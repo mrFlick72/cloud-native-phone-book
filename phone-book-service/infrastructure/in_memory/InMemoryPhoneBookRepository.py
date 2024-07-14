@@ -6,7 +6,7 @@ class InMemoryPhoneBookRepository(PhoneBookRepository):
     def __init__(self):
         self.storage = set([])
 
-    def get_records(self, user_name):
+    def get_records(self, user_name) -> list[PhoneBook]:
         return self.storage
 
     def save(self, phone_book_record: PhoneBook):

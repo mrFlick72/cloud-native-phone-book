@@ -7,7 +7,7 @@ class PostgresqlPhoneBookRepository(PhoneBookRepository):
     def __init__(self):
         self.data_base_connection_manager = DataBaseConnectionManager(DatabaseConfigurationProp())
 
-    def get_records(self, user_name):
+    def get_records(self, user_name) -> list[PhoneBook]:
         cursor = self.data_base_connection_manager.get_connection_cursor()
 
         cursor.execute(f"SELECT * FROM PHONE_BOOK WHERE USER_NAME='{user_name}'")

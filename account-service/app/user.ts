@@ -1,7 +1,5 @@
 import pg from 'pg';
 import {Express, Request, Response} from "express";
-import {loginTokenService} from "./token";
-import {UserLoginService, UserNameAndPassword} from "./login";
 
 
 const {Pool} = pg
