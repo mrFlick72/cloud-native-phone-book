@@ -10,5 +10,9 @@ def application_init(app):
     get_phone_book_records = GetPhoneBookRecords(repository)
     update_phone_book_record = SavePhoneBookRecord(repository)
     delete_phone_book_record = DeletePhoneBookRecord(repository)
-    user_name_resolver = LocalThreadUserNameResolver()
-    PhoneBookEndPoint(app, get_phone_book_records, update_phone_book_record, delete_phone_book_record, user_name_resolver)
+    PhoneBookEndPoint(app,
+                      get_phone_book_records,
+                      update_phone_book_record,
+                      delete_phone_book_record,
+                      LocalThreadUserNameResolver.get_instance()
+                      )

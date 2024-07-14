@@ -11,7 +11,7 @@ from infrastructure.LocalThreadUserNameResolver import LocalThreadUserNameResolv
 class UserNameInjectorFilter:
 
     def __init__(self):
-        self.user_name_resolver = LocalThreadUserNameResolver()
+        self.user_name_resolver = LocalThreadUserNameResolver.get_instance()
         self.public_keys = {}
         self.jwk_endpoint = "http://localhost:3000/jwks"
         jwks = requests.get(self.jwk_endpoint).json()

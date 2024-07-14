@@ -7,6 +7,8 @@ from infrastructure.LocalThreadUserNameResolver import LocalThreadUserNameResolv
 
 DATE_FORMAT = '%Y-%m-%d'
 
+resolver = LocalThreadUserNameResolver.get_instance()
+
 
 def fromDomainToRepresentations(phone_book_records: list[PhoneBook]):
     result = []
@@ -16,7 +18,7 @@ def fromDomainToRepresentations(phone_book_records: list[PhoneBook]):
 
 
 def fromDomainToRepresentation(phone_book_record: PhoneBook):
-    user_name = LocalThreadUserNameResolver().get_user_name()
+    user_name = resolver.get_user_name()
     item_as_dict = dataclasses.asdict(phone_book_record)
     item_as_dict["user_name"] = user_name
     item_as_dict["birth_date"] = item_as_dict["birth_date"].strftime(DATE_FORMAT)
@@ -24,7 +26,7 @@ def fromDomainToRepresentation(phone_book_record: PhoneBook):
 
 
 def fromRepresentationToDomain(contact_id, phone_book_record_dict):
-    user_name = LocalThreadUserNameResolver().get_user_name()
+    user_name = resolver.get_user_name()
     return PhoneBook(
         user_name=user_name,
         contact_name=contact_name(contact_id),

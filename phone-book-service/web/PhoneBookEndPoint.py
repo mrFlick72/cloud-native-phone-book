@@ -1,7 +1,6 @@
-import dataclasses
 import json
 
-from flask import Flask, request, jsonify
+from flask import Flask, request
 
 from domain import UserNameResolver
 from domain.PhoneBook import GetPhoneBookRecords, SavePhoneBookRecord, DeletePhoneBookRecord
