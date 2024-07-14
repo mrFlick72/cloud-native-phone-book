@@ -4,7 +4,6 @@ from infrastructure.database.PostgresqlPhoneBookRepository import PostgresqlPhon
 from web.PhoneBookEndPoint import PhoneBookEndPoint
 
 
-@staticmethod
 def application_init(app):
     repository = PostgresqlPhoneBookRepository()
     get_phone_book_records = GetPhoneBookRecords(repository)
