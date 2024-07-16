@@ -5,11 +5,11 @@ import {Express, Request, Response} from "express";
 const {Pool} = pg
 
 const pool = new Pool({
-    user: 'postgres',
-    password: 'postgres',
-    host: 'localhost',
-    port: 5436,
-    database: 'postgres',
+    user: process.env.POSTGRESQL_USER || 'postgres',
+    password: process.env.POSTGRESQL_PASSWORD || 'postgres',
+    host: process.env.POSTGRESQL_HOST || 'localhost',
+    port: Number(process.env.POSTGRESQL_POST) || 5436,
+    database: process.env.POSTGRESQL_DATABASE || 'postgres',
 })
 
 

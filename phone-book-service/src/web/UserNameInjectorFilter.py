@@ -21,10 +21,11 @@ class UserNameInjectorFilter:
             self.public_keys[kid] = jwt.algorithms.RSAAlgorithm.from_jwk(json.dumps(jwk))
 
     def filter(self, user_name_claim="user_name"):
-        token = str(request.headers.get("authorization"))
-        decoded_token = decode(jwt=token, key=self.public_keys['123'], algorithms=['RS256'],
-                               audience=os.getenv('PHONE_BOOK_AUD_CLAIM'))
-        self.user_name_resolver.set_user_name(decoded_token["user_name"])
+        if request.path not in ["/health"]:
+            token = str(request.headers.get("authorization"))
+            decoded_token = decode(jwt=token, key=self.public_keys['123'], algorithms=['RS256'],
+                                   audience=os.getenv('PHONE_BOOK_AUD_CLAIM'))
+            self.user_name_resolver.set_user_name(decoded_token["user_name"])
         return None
 
     def decode(self, token):
