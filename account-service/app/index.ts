@@ -8,15 +8,23 @@ import {registerHealthEndPointFor} from "./health";
 dotenv.config();
 
 const app: Express = express();
-const port = process.env.APPLICATION_PORT || "3000";
+let port = Number(process.env.APPLICATION_PORT) || 3000;
+
+const actuatorApp: Express = express();
+const actuatorPort = port + 1
 
 app.use(express.json());
 
 registerLoginEndPointFor(app)
 registerUserEndPointFor(app)
 registerJwkEndpointFor(app)
-registerHealthEndPointFor(app)
+
+registerHealthEndPointFor(actuatorApp)
 
 app.listen(port, () => {
-    console.log(`⚡️[server]: Server is running at https://localhost:${port}`);
+    console.log(`⚡️[server]: Server is running at http://localhost:${port}`);
+});
+
+actuatorApp.listen(actuatorPort, () => {
+    console.log(`⚡️[server]: Server is running at http://localhost:${actuatorPort}`);
 });
