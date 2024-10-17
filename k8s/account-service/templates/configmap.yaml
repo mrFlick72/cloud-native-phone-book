@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ include "account-service.fullname" . }}
+data:
+  POSTGRESQL_USER: "{{ .Values.config.databaseUser }}"
+  POSTGRESQL_PASSWORD: "{{ .Values.config.databasePassword }}"
+  POSTGRESQL_HOST: "{{ .Values.config.databaseHost }}"
+  POSTGRESQL_POST: "{{ .Values.config.databasePort }}"
+  POSTGRESQL_DATABASE: "{{ .Values.config.database }}"
+  JWT_ISSUER: "{{ .Values.config.jwtIssuer }}"
+  JWT_AUDIENCE: "{{ .Values.config.jwtAudiance }}"
+  JWT_EXPIRATION_TIME: "{{ .Values.config.jwtExt }}"
+  APPLICATION_PORT: "{{ .Values.config.appPort }}"
