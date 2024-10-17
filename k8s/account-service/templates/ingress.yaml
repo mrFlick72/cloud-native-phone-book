@@ -4,10 +4,11 @@ metadata:
   name: {{ include "account-service.fullname" . }}
   labels:
     {{- include "account-service.labels" . | nindent 4 }}
-  {{- with .Values.ingress.annotations }}
   annotations:
+    kubernetes.io/ingress.class: {{ .Values.ingress.class }}
+    {{- with .Values.ingress.annotations }}
     {{- toYaml . | nindent 4 }}
-  {{- end }}
+    {{- end }}
 spec:
   ingressClassName: {{ .Values.ingress.className }}
   rules:
@@ -20,3 +21,4 @@ spec:
                 name: {{ include "account-service.fullname" . }}
                 port:
                   number: {{ .Values.service.port }}
+      host: {{ .Values.ingress.host }}

@@ -12,4 +12,14 @@ helm install postgresql oci://registry-1.docker.io/bitnamicharts/postgresql  --c
 in order to connect from host issue this command:
 
 > kubectl port-forward svc/postgresql -n phonebook  5432:5432
- 
+
+### set up the specific services
+
+
+```shell
+
+helm install account-service account-service --namespace phonebook
+helm upgrade account-service account-service --namespace phonebook
+
+
+```
