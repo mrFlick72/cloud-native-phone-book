@@ -6,7 +6,7 @@ replicaCount: 1
 
 image:
   repository: mrflick72/cloud-native-phone-book_phone-book-service
-  pullPolicy: IfNotPresent
+  pullPolicy: Always
   # Overrides the image tag whose default is the chart appVersion.
   tag: "latest"
 
@@ -72,4 +72,4 @@ config:
   databasePort: 5432
   database: phonebook
   jwtAudiance: http://phone-book.local
-  jwtIssuer: http://auth.phone-book.local
+  jwtIssuer: http://account-service.phonebook.svc.cluster.local:3000

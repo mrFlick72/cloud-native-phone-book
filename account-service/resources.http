@@ -11,7 +11,7 @@ POST http://auth.phone-book.local/account
 Content-Type: application/json
 
 {
-  "userName" :  "vvaudi123",
+  "userName" :  "vvaudi",
   "password" : "secret",
   "firstName" : "Valerio",
   "lastName" : "Vaudi"

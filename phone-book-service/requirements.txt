@@ -1,4 +1,5 @@
 Flask==3.0.3
 psycopg2-binary==2.9.9
+cryptography==36.0.1
 PyJWT==2.4.0
 requests==2.32.3
