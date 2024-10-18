@@ -5,5 +5,4 @@ COPY src .
 
 RUN pip install -r requirements.txt
 
-CMD ls -la
-#CMD python app.py
+CMD python app.py
