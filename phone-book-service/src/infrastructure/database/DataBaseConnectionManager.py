@@ -14,11 +14,11 @@ class DatabaseConfigurationProp:
 class DataBaseConnectionManager:
 
     def __init__(self, configuration: DatabaseConfigurationProp):
-        print(self.user)
-        print(self.password)
-        print(self.host)
-        print(self.port)
-        print(self.database)
+        print(configuration.user)
+        print(configuration.password)
+        print(configuration.host)
+        print(configuration.port)
+        print(configuration.database)
         self.thread_pool = pool.ThreadedConnectionPool(2, 5,
                                                        user=configuration.user,
                                                        password=configuration.password,
