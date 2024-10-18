@@ -8,6 +8,5 @@ data:
   POSTGRESQL_HOST: "{{ .Values.config.databaseHost }}"
   POSTGRESQL_POST: "{{ .Values.config.databasePort }}"
   POSTGRESQL_DATABASE: "{{ .Values.config.database }}"
-
   PHONE_BOOK_AUD_CLAIM: "{{ .Values.config.jwtAudiance }}"
   ACCOUNT_SERVICE_ISS: "{{ .Values.config.jwtIssuer }}"

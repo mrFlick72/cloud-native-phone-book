@@ -2,6 +2,7 @@
 
 ## How to install on K8s (Kind)
 
+
 ### set up the basic infrastructure
 
 ```shell
@@ -34,3 +35,6 @@ helm upgrade phone-book-service phone-book-service --namespace phonebook
 
 
 ```
+
+> change kubectl default namespace
+> kubectl config set-context $(kubectl config current-context) --namespace=phonebook
