@@ -1,7 +1,7 @@
 from flask import Flask
 
-from src.infrastructure.AppConfig import application_init
-from src.web.UserNameInjectorFilter import UserNameInjectorFilter
+from infrastructure.AppConfig import application_init
+from web.UserNameInjectorFilter import UserNameInjectorFilter
 from web.HealthEndPoint import HealthEndPoint
 
 app = Flask(__name__)

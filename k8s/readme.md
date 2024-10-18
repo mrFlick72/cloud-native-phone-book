@@ -15,11 +15,19 @@ in order to connect from host issue this command:
 
 ### set up the specific services
 
-
+> account service
 ```shell
 
 helm install account-service account-service --namespace phonebook
 helm upgrade account-service account-service --namespace phonebook
+
+
+```
+> phone book service
+```shell
+
+helm install phone-book-service phone-book-service --namespace phonebook
+helm upgrade phone-book-service phone-book-service --namespace phonebook
 
 
 ```
