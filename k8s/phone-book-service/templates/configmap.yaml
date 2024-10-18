@@ -3,10 +3,10 @@ kind: ConfigMap
 metadata:
   name: {{ include "phone-book-service.fullname" . }}
 data:
-  POSTGRESQL_USER: "{{ .Values.config.databaseUser }}"
-  POSTGRESQL_PASSWORD: "{{ .Values.config.databasePassword }}"
-  POSTGRESQL_HOST: "{{ .Values.config.databaseHost }}"
-  POSTGRESQL_POST: "{{ .Values.config.databasePort }}"
-  POSTGRESQL_DATABASE: "{{ .Values.config.database }}"
+  PHONE_BOOK_DATABASE_USER_NAME: "{{ .Values.config.databaseUser }}"
+  PHONE_BOOK_DATABASE_PASSWORD: "{{ .Values.config.databasePassword }}"
+  PHONE_BOOK_DATABASE_HOST: "{{ .Values.config.databaseHost }}"
+  PHONE_BOOK_DATABASE_PORT: "{{ .Values.config.databasePort }}"
+  PHONE_BOOK_DATABASE_NAME: "{{ .Values.config.database }}"
   PHONE_BOOK_AUD_CLAIM: "{{ .Values.config.jwtAudiance }}"
   ACCOUNT_SERVICE_ISS: "{{ .Values.config.jwtIssuer }}"
