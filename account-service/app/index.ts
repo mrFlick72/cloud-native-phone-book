@@ -5,6 +5,10 @@ import {registerUserEndPointFor} from "./user";
 import {registerJwkEndpointFor} from "./jwk";
 import {registerHealthEndPointFor} from "./health";
 
+process.on('uncaughtException', function (error) {
+    console.log(error.stack);
+});
+
 dotenv.config();
 
 const app: Express = express();

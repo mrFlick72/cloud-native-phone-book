@@ -4,6 +4,9 @@ auth:
   database: phonebook
 
 primary:
+  podAnnotations:
+    linkerd.io/inject: enabled
+    config.linkerd.io/skip-inbound-ports: "5432"
   initdb:
     scripts:
       init.sql: |

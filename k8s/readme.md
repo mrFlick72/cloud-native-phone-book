@@ -2,12 +2,30 @@
 
 ## How to install on K8s (Kind)
 
-
 ### set up the basic infrastructure
 
-```shell
+#### install istio
 
-helm install postgresql oci://registry-1.docker.io/bitnamicharts/postgresql  --create-namespace --namespace phonebook --values postgresql.yml
+````shell
+curl -L https://istio.io/downloadIstio | sh -
+cd istio-1.23.2
+export PATH=$PWD/bin:$PATH
+istioctl install
+
+kubectl apply -f samples/addons
+kubectl rollout status deployment/kiali -n istio-system
+istioctl dashboard kiali
+istioctl dashboard grafana
+
+````
+
+#### install basic application infrastructure
+
+```shell
+kubectl apply -f namespace.yml
+
+helm install postgresql oci://registry-1.docker.io/bitnamicharts/postgresql  --namespace phonebook --values postgresql.yml
+helm upgrade postgresql oci://registry-1.docker.io/bitnamicharts/postgresql  --namespace phonebook --values postgresql.yml
 
 ```
 in order to connect from host issue this command:
@@ -36,5 +54,9 @@ helm upgrade phone-book-service phone-book-service --namespace phonebook
 
 ```
 
-> change kubectl default namespace
-> kubectl config set-context $(kubectl config current-context) --namespace=phonebook
+### change kubectl default namespace
+
+```shell
+kubectl config set-context $(kubectl config current-context) --namespace=phonebook
+
+```
